@@ -1,17 +1,22 @@
-console.log("Hello from TS 13!");
+console.log("Hello from TS 14!");
 import { io } from "socket.io-client";
+import Mustache from "mustache";
+
 const socket = io();
 
 const $messageForm = document.querySelector("#message-form");
 const $messageFormInput = $messageForm!.querySelector("input");
 const $messageFormButton = $messageForm?.querySelector("button");
 const $sendLocationButton = document.querySelector("#send-location");
+const $messages = document.querySelector("#messages");
 
-//!
-$messageFormInput;
+//* Templates
+const $messageTemplate = document.querySelector("#message-template")!.innerHTML;
 
 socket.on("mainMessage", (msg) => {
 	console.log(msg);
+	const html = Mustache.render($messageTemplate, { message: msg });
+	$messages!.insertAdjacentHTML("beforeend", html);
 });
 
 //*Button to send a message
@@ -19,13 +24,15 @@ $messageForm!.addEventListener("submit", (e) => {
 	//! disable
 	e.preventDefault();
 	$messageFormButton?.setAttribute("disabled", "disabled");
-	$messageFormInput!.value = "";
-	$messageFormInput!.focus();
 
 	const input: any = (e.target as any).elements.message!.value;
 	//$e = event, target = form element, elements = all form elements, message = name of the element (name="message")
+	$messageFormInput!.value = "";
+	$messageFormInput!.focus();
+
 	socket.emit("sendMessage", input, (e: any) => {
 		//! enable
+		$messageFormButton!.removeAttribute("disabled");
 		if (e) {
 			return console.log(e);
 		}
@@ -62,7 +69,7 @@ $sendLocationButton!.addEventListener("click", () => {
 			console.error(
 				`Error occurred while fetching location: Code ${error.code}, Message: ${error.message}`
 			);
-			// $sendLocationButton!.removeAttribute("disabled");
+			$sendLocationButton!.removeAttribute("disabled");
 		}
 	);
 });
