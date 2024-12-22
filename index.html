@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="icon" href="/src/favicon.png" />
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
-		<link rel="stylesheet" href="/src/style.css" />
+
+		<link rel="stylesheet" href="/src/styles.min.css" />
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Vite + TS 123112</title>
+		<title>Chat App</title>
 	</head>
 	<body>
-		<div id="messages"></div>
-
-		<form id="message-form">
-			<input name="message" placeholder="Type your message" />
-			<button id="send-message">Send message</button>
-		</form>
-
-		<button id="send-location">Send Location</button>
-
-		<script id="message-template" type="text/html">
-			<div>
-				<p>{{message}}</p> 
+		<div class="centered-form">
+			<div class="centered-form__box">
+				<h1>Join</h1>
+				<form action="/chat.html">
+					<label>Display Name</label>
+					<input type="text" name="username" placeholder="Display Name" required>
+					<label>Room</label>
+					<input type="text" name="room" placeholder="Room" required>
+					<button>Join</button>
+				</form>
 			</div>
-		</script>
-
-		<script type="module" src="/src/chat.ts"></script>
+		</div>
 	</body>
 </html>

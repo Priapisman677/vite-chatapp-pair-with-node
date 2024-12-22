@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="icon" href="/src/favicon.png" />
+		<meta charset="UTF-8" />
+
+		<link rel="stylesheet" href="/src/styles.min.css" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Chat App</title>
+	</head>
+	<body>
+		<div class="chat">
+			<div class="chat__sidebar"></div>
+
+			<div class="chat__main">
+				<div id="messages" class="chat__messages"></div>
+
+				<div class="compose">
+					<form id="message-form">
+						<input
+							name="message"
+							placeholder="Type your message"
+						/>
+						<button id="send-message">
+							Send message
+						</button>
+					</form>
+
+					<button id="send-location">Send Location</button>
+				</div>
+			</div>
+		</div>
+
+		<script id="message-template" type="text/html">
+			<div class="message">
+				<p>
+					<span class="message__name"> Some userName</span>
+					<span class="message__meta">{{createdAt}}</span>
+				</p>
+				<p>{{message}}</p>
+			</div>
+		</script>
+		<script id="location-template" type="text/html">
+			<div class="message">
+				<p>
+					<span class="message__name"> Some userName</span>
+					<span class="message__meta">{{createdAt}}</span>
+				</p>
+				<p>
+					<a href="{{location}}" target="_blank">My location</a>
+				</p>
+			</div>
+		</script>
+
+		<script type="module" src="/src/chat.ts"></script>
+	</body>
+</html>
