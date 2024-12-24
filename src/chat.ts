@@ -5,7 +5,7 @@ import Moment from "moment";
 import queryString from "query-string";
 
 
-const socket = io("http://localhost:3000");
+const socket = io();
 
 socket.on("connect", () => {
 	console.log("Connected to server!!!");
